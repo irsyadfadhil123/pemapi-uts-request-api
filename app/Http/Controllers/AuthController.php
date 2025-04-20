@@ -29,7 +29,7 @@ class AuthController extends Controller
             'api_key'  => bin2hex(random_bytes(16)),
         ]);
 
-        return redirect()->route('login.form')->with('success', 'Berhasil daftar! Silakan login.');
+        return redirect()->route('login.form')->with('success', 'Register Success! You can now login.');
     }
 
     public function showLogin()
@@ -47,10 +47,9 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return back()->with('error', 'Email atau password salah');
+            return back()->with('error', 'Wrong email or password');
         }
 
-        // Simpan user ke session (opsional)
         session(['user' => $user]);
 
         return view('dashboard', ['user' => $user]);
