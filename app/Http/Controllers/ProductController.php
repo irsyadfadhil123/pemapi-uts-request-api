@@ -34,6 +34,7 @@ class ProductController extends Controller
             'category' => 'required',
             'description' => 'nullable',
             'brand' => 'nullable',
+            'image' => 'nullable',
         ]);
 
         $product = Product::create($validated);
